@@ -7,8 +7,10 @@ function initDeploy(config)
 	local xArr = {}
 	local yArr = {}
 	local eArr = {}
-
+	local group = display.newGroup( )
 	local number = 6
+
+
 	if(config~=nil) then
 		if(config.number~=nil) then
 			number = config.number
@@ -36,11 +38,12 @@ function initDeploy(config)
 			end
 		end
 		
-		element.new({x=X, y=Y, type = i % 3 })
+		local temp = element.new({x=X, y=Y, type = i % 3 })
+		group:insert(temp)
 		xArr[i] = X
 		yArr[i] = Y
 	end
 	
 
-
+	return group
 end

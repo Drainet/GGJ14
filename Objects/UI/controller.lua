@@ -9,9 +9,16 @@ function new(config)
 	controller.ddir = 0
 	controller.lfbt = display.newImage( "image/left.png",70,config.y )
 	controller.rtbt = display.newImage( "image/right.png",display.contentWidth-70,config.y )
+	controller.btntouchcnt = 0
+
+	controller.image.anchorChildren = true
+	controller.image.x=360
+	controller.image.y=config.y
 
 	controller.image:insert( controller.lfbt )
 	controller.image:insert( controller.rtbt )
+
+	controller.image.rotation = config.rotate
 	function controller.rotate( event )
 	    
 		--local value = math.sqrt(config.controller.direction.x^2 + config.controller.direction.y^2)
@@ -43,12 +50,17 @@ function new(config)
 	    	display.getCurrentStage():setFocus( controller.lfbt, event.id )
 	    	timer.resume( controller.timers[1] )
 	        controller.ddir = -4
+	        controller.btntouchcnt = controller.btntouchcnt+1
 	    end
 
 	    if event.phase == "ended" then
+	    	controller.btntouchcnt = controller.btntouchcnt-1
+	    	if(controller.btntouchcnt<=0)then
 
-	    	timer.pause( controller.timers[1] )
-	        controller.ddir = -4
+	    		timer.pause( controller.timers[1] )
+	        	controller.ddir = 0
+	        	controller.btntouchcnt=0
+	    	end
 	    end
 	    return true
 	end 
@@ -58,14 +70,19 @@ function new(config)
 			display.getCurrentStage():setFocus( controller.rtbt, event.id )
 			timer.resume( controller.timers[1] )
 	    	controller.ddir = 4
+	    	controller.btntouchcnt = controller.btntouchcnt+1
 	    	
 	    end
 
 	    if event.phase == "ended" then
+	    	controller.btntouchcnt = controller.btntouchcnt-1
+	    	if(controller.btntouchcnt<=0)then
 
-	    	timer.pause( controller.timers[1] )
-	        controller.ddir = 4
-	    end
+		    	timer.pause( controller.timers[1] )
+		        controller.ddir = 0
+		        controller.btntouchcnt=0
+		    end
+		end
 	    return true
 
 	end
