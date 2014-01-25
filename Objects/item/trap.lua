@@ -11,6 +11,7 @@ function new(config)
 
 	local trap = object.new()
 	trap.image = display.newGroup( )
+	trap.image.name = "trap"
 	
 	
 	local imageSheet = graphics.newImageSheet( "trap_set.png", { width=72, height=72, numFrames=3 } )
