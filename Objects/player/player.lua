@@ -9,12 +9,12 @@ function new(config)
 	self.direction = config.direction
 	
 	self.image:insert( self.body )
-	physics.addBody( self.image,{ density=10.0, friction=1, bounce=0} )
+	physics.addBody( self.body,{ density=10.0, friction=1, bounce=0} )
 
 
 	function self:playerState(event)
 
-		self.image:setLinearVelocity(self.direction.x , self.direction.y)
+		self.body:setLinearVelocity(self.direction.x , self.direction.y)
 
 	end
 
