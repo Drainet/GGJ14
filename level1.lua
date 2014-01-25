@@ -14,6 +14,7 @@ local eventCentral = eventCentralMOD.new()
 eventCentral:start( )
 -- include Corona's "physics" library
 local physics = require "physics"
+local testElement = require "Objects.item.element"
 physics.start(); physics.pause()
 
 physics.setGravity( 0, 0 )
@@ -36,11 +37,22 @@ local screenW, screenH, halfW = display.contentWidth, display.contentHeight, dis
 function scene:createScene( event )
 	local group = self.view
 
+
 	
 	local playerA = player.new({x=360,y=200,direction={x=0,y=150}})
 	local playerB = player.new({x=360,y=1080,direction={x=0,y=-150}})
 	local controllA = controller.new({y=62,player = playerA})
 	local controllB = controller.new({y=display.contentHeight-62,player = playerB})
+
+	local elementDeploy = require "elementDeploy"
+	local test = elementDeploy.initDeploy()
+
+	-- local element1 = testElement.new({x = 100,y = 100})
+	-- local element1 = testElement.new({x = 200,y = 200})
+	-- local element1 = testElement.new({x = 300,y = 300})
+	-- local element1 = testElement.new({x = 400,y = 400})
+
+
 	-- create a grey rectangle as the backdrop
 	local background = display.newImage( "gd.jpg", screenW/2, screenH/2 )
 	local mapA = map.new()
