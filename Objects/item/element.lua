@@ -16,14 +16,23 @@ function new(config)
 	}
 	
 	element.mainImg = display.newImage(imgList[element.type + 1], config.x, config.y, true)
-	element.mainImg.isSensor = true
 	element.image:insert( element.mainImg )
+	physics.addBody(element.image,"static")
+	
+	element.mainImg.x = element.image.x
+	element.mainImg.y = element.image.y
+	element.image.x = config.x
+	element.image.y = config.y
+
+	element.image.isSensor = true
 
 	function element.image.collision(self, event)
+		print("SSS")
 		if(event.other.name == "player") then
-
-			element.image:removeSelf( )
-			element.image = nil
+			
+			-- element.image:removeSelf( )
+			-- element.image = nil
+			element.dispose()
 		end
 	end	
 

@@ -21,7 +21,7 @@ function new(config)
 	trap.image.y = config.y
 
 	physics.addBody(trap.image,"static")
-
+	trap.image.isSensor = true
 	function trap.colllison(self , event)
 		--- player can change tpye of trap ---
 		if( (trap.image.type + 1)%3 == event.other.type ) then
