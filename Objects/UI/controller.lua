@@ -40,31 +40,31 @@ function new(config)
 
 	function controller.lfbt:touch( event )
 	    if event.phase == "began" then
-
+	    	display.getCurrentStage():setFocus( controller.lfbt, event.id )
 	    	timer.resume( controller.timers[1] )
-	        controller.ddir = -2
+	        controller.ddir = -4
 	    end
 
 	    if event.phase == "ended" then
 
 	    	timer.pause( controller.timers[1] )
-	        controller.ddir = -2
+	        controller.ddir = -4
 	    end
 	    return true
 	end 
 
 	function controller.rtbt:touch( event )
 		if event.phase == "began" then
-
+			display.getCurrentStage():setFocus( controller.rtbt, event.id )
 			timer.resume( controller.timers[1] )
-	    	controller.ddir = 2
+	    	controller.ddir = 4
 	    	
 	    end
 
 	    if event.phase == "ended" then
 
 	    	timer.pause( controller.timers[1] )
-	        controller.ddir = 2
+	        controller.ddir = 4
 	    end
 	    return true
 

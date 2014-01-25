@@ -19,6 +19,7 @@ physics.start(); physics.pause()
 
 physics.setGravity( 0, 0 )
 
+system.activate("multitouch")
 
 local trap =  require("Objects.item.trap")
 --------------------------------------------
@@ -39,8 +40,8 @@ function scene:createScene( event )
 
 
 	
-	local playerA = player.new({x=360,y=200,direction={x=0,y=150}})
-	local playerB = player.new({x=360,y=1080,direction={x=0,y=-150}})
+	local playerA = player.new({x=360,y=200,direction={x=0,y=150}, path ="image/playerA.png"})
+	local playerB = player.new({x=360,y=1080,direction={x=0,y=-150}, path = "image/playerB.png"})
 	local controllA = controller.new({y=62,player = playerA})
 	local controllB = controller.new({y=display.contentHeight-62,player = playerB})
 
