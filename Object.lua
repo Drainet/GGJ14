@@ -114,9 +114,9 @@ function new()
 
     end
 
-    -- scene:addEventListener( 'removeAllEvent', Object )
-    -- scene:addEventListener( 'pauseAllEvent', Object )
-    -- scene:addEventListener( 'resumeAllEvent', Object )
+    scene:addEventListener( 'removeAllEvent', Object )
+    scene:addEventListener( 'pauseAllEvent', Object )
+    scene:addEventListener( 'resumeAllEvent', Object )
 	
 	-- Object.listeners[table.maxn(Object.listeners)+1] = {event='removeAllEvent' , listener = Object}
 	-- Object.listeners[table.maxn(Object.listeners)+1] = {event='pauseAllEvent' , listener = Object}
