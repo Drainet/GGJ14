@@ -55,7 +55,9 @@ function new(config)
 
 	    if event.phase == "ended" then
 	    	controller.btntouchcnt = controller.btntouchcnt-1
-	    	if(controller.btntouchcnt<=0)then
+	    	if(controller.btntouchcnt==1)then
+	    		controller.ddir = 4
+	    	elseif(controller.btntouchcnt<=0)then
 
 	    		timer.pause( controller.timers[1] )
 	        	controller.ddir = 0
@@ -76,7 +78,9 @@ function new(config)
 
 	    if event.phase == "ended" then
 	    	controller.btntouchcnt = controller.btntouchcnt-1
-	    	if(controller.btntouchcnt<=0)then
+	    	if(controller.btntouchcnt==1)then
+	    		controller.ddir = -4
+	    	elseif(controller.btntouchcnt<=0)then
 
 		    	timer.pause( controller.timers[1] )
 		        controller.ddir = 0
