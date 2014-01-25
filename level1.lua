@@ -10,6 +10,7 @@ local controller =  require("Objects.UI.controller")
 
 -- include Corona's "physics" library
 local physics = require "physics"
+local testElement = require "Objects.item.element"
 physics.start(); physics.pause()
 
 --------------------------------------------
@@ -31,6 +32,13 @@ function scene:createScene( event )
 
 	local controllA = controller.new({y=display.contentHeight-62})
 	local controllB = controller.new({y=62})
+	local elementDeploy = require "elementDeploy"
+	local test = elementDeploy.initDeploy()
+
+	-- local element1 = testElement.new({x = 100,y = 100})
+	-- local element1 = testElement.new({x = 200,y = 200})
+	-- local element1 = testElement.new({x = 300,y = 300})
+	-- local element1 = testElement.new({x = 400,y = 400})
 
 	-- create a grey rectangle as the backdrop
 	local background = display.newRect( 0, 0, screenW, screenH )
