@@ -9,6 +9,7 @@ local scene = storyboard.newScene()
 local controller =  require("Objects.UI.controller")
 local player =  require("Objects.player.player")
 local eventCentralMOD =  require("eventCentral")
+local map = require("Objects.map.map")
 local eventCentral = eventCentralMOD.new()
 eventCentral:start( )
 -- include Corona's "physics" library
@@ -35,18 +36,18 @@ function scene:createScene( event )
 	local group = self.view
 
 	
-	local playerA = player.new({x=360,y=50,direction={x=0,y=100}})
-	local playerB = player.new({x=360,y=1200,direction={x=0,y=-100}})
+	local playerA = player.new({x=360,y=200,direction={x=0,y=150}})
+	local playerB = player.new({x=360,y=1080,direction={x=0,y=-150}})
 	local controllA = controller.new({y=62,player = playerA})
 	local controllB = controller.new({y=display.contentHeight-62,player = playerB})
 	-- create a grey rectangle as the backdrop
 	local background = display.newImage( "gd.jpg", screenW/2, screenH/2 )
-	
+	local mapA = map.new()
 	
 	-- make a crate (off-screen), position it, and rotate slightly
 	
-	
 	-- all display objects must be inserted into group
+	group:insert(mapA.image)
 	group:insert( background )
 	
 	group:insert( controllA.image )

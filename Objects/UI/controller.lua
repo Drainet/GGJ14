@@ -4,39 +4,76 @@ local object = require('Object')
 
 function new(config)
 
-	local self = object.new()
-	self.image = display.newGroup( )
-	
-	self.lfbt = display.newImage( "image/leftBT.png",70,config.y )
-	self.rtbt = display.newImage( "image/rightBT.png",display.contentWidth-70,config.y )
+	local controller = object.new()
+	controller.image = display.newGroup( )
+	controller.ddir = 0
+	controller.lfbt = display.newImage( "image/left.png",70,config.y )
+	controller.rtbt = display.newImage( "image/right.png",display.contentWidth-70,config.y )
 
-	self.image:insert( self.lfbt )
-	self.image:insert( self.rtbt )
-	--self.timer[]
+	controller.image:insert( controller.lfbt )
+	controller.image:insert( controller.rtbt )
+	function controller.rotate( event )
+	    
+		--local value = math.sqrt(config.controller.direction.x^2 + config.controller.direction.y^2)
+	    --config.controller.direction.x = config.controller.direction.x + controller.ddir 
+	        --config.controller.direction.x = config.controller.direction.x + 10
+	    config.player.deg =  config.player.deg + controller.ddir*math.pi/180
 
-	function self.lfbt:touch( event )
+
+
+	    local ddeg = config.player.deg * 180/math.pi
+
+	    if(ddeg>360 or ddeg<-360)then
+	    	config.player.deg = 0
+	    end
+
+	    print( ddeg)
+	    
+	    	config.player.direction.x =  config.player.value*math.cos(config.player.deg)
+	    	config.player.direction.y =  config.player.value*math.sin(config.player.deg)
+	    
+
+	   
+	end 
+	controller.timers[1] = timer.performWithDelay( 10, controller.rotate,0)
+	timer.pause( controller.timers[1] )
+
+	function controller.lfbt:touch( event )
 	    if event.phase == "began" then
 
+	    	timer.resume( controller.timers[1] )
+	        controller.ddir = -2
+	    end
 
-	        config.player.direction.x = config.player.direction.x - 10
+	    if event.phase == "ended" then
+
+	    	timer.pause( controller.timers[1] )
+	        controller.ddir = -2
 	    end
 	    return true
 	end 
 
-	function self.rtbt:touch( event )
+	function controller.rtbt:touch( event )
 		if event.phase == "began" then
 
+			timer.resume( controller.timers[1] )
+	    	controller.ddir = 2
 	    	
-	    	config.player.direction.x = config.player.direction.x + 10
+	    end
+
+	    if event.phase == "ended" then
+
+	    	timer.pause( controller.timers[1] )
+	        controller.ddir = 2
 	    end
 	    return true
 
 	end
 
-	self.lfbt:addEventListener( "touch",self.lfbt)
-	self.rtbt:addEventListener( "touch",self.rtbt)
+	controller.lfbt:addEventListener( "touch",controller.lfbt)
+	controller.rtbt:addEventListener( "touch",controller.rtbt)
 
 
-	return self
+	return controller
 
 end
