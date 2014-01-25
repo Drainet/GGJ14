@@ -30,6 +30,8 @@ function new(config)
 	physics.addBody( player.body,{ density=10.0, friction=1, bounce=0.2, radius = 40} )
 	--player.body.isFixedRotation = true
 	--physics.setDrawMode( "hybrid" )
+
+	player.body.name ="player"
 	function player:playerState(event)
 		player.body.rotation = -90 + player.deg * 180 /math.pi 
 		player.body:setLinearVelocity(player.direction.x , player.direction.y)
