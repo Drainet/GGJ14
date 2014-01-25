@@ -6,8 +6,8 @@ function new(config)
 
 	local element = object.new()
 	element.image = display.newGroup( )
-
-	element.type = config.type
+	element.image.name = "element"
+	element.image.type = config.type
 	
 	imgList = {
 		[1] = "rune_w.png",
@@ -15,7 +15,7 @@ function new(config)
 		[3] = "rune_t.png"
 	}
 	
-	element.mainImg = display.newImage(imgList[element.type + 1], config.x, config.y, true)
+	element.mainImg = display.newImage(imgList[element.image.type + 1], config.x, config.y, true)
 	element.image:insert( element.mainImg )
 	physics.addBody(element.image,"static")
 	
@@ -27,8 +27,8 @@ function new(config)
 	element.image.isSensor = true
 
 	function element.image.collision(self, event)
-		print("SSS")
-		if(event.other.name == "player") then
+		--print("SSS")
+		if(event.other.name == "player" and event.phase=="began") then
 			
 			-- element.image:removeSelf( )
 			-- element.image = nil

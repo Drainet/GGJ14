@@ -62,7 +62,7 @@ function initDeploy(config)
 			end
 		end
 		
-		local tempp = trap.new({x=X, y=Y, type = i % 3 })
+		local tempp = trap.new({ type = i % 3 ,x=X, y=Y})
 		group:insert(tempp.image)
 
 		xArr[i] = X

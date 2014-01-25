@@ -13,9 +13,9 @@ function new(config)
 	local sequenceData =
 	{
 	    { name="normal", start=1, count=2, time=600 , loopCount=0 },
-	    { name="wood", start=3, count=4, time=600 , loopCount=0 },
-	    { name="fire", start=5, count=6, time=600 , loopCount=0},
-	    { name="water", start=7, count=8, time=600 , loopCount=0 }
+	    { name="1", start=3, count=2, time=600 , loopCount=0 },
+	    { name="2", start=5, count=2, time=600 , loopCount=0},
+	    { name="0", start=7, count=2, time=600 , loopCount=0 }
 	}
 	player.body = display.newSprite( imageSheet, sequenceData )
 
@@ -39,21 +39,24 @@ function new(config)
 	end
 
 
-	function player.image:collision(event)
+	function player.body:collision(event)
+		
 		if(event.phase=="began") then
-			if(event.other.name=="player" and event.other.name == "trap") then
+			if(event.other.name=="player" or event.other.name == "trap") then
 				
-				
-				if ((self.type+2)%3==event.other.type or(self.type == nil and event.other.type ~= nil)) then
+				if ( self.type == nil and event.other.type == nil) then
+				elseif ( (self.type == nil and event.other.type ~= nil) or (self.type+2)%3==event.other.type ) then
 					--lose
-
+					player.dispose()
+					print( "lose" )
 					--
 				end
 
 			elseif (event.other.name=="element") then
-
+				print( "asas" )
 				self.type = event.other.type
-				--player.body:setSequence( "normal" )
+				print( self.type )
+				player.body:setSequence( tostring(self.type) )
 				player.body:play()
 				
 			end
@@ -61,7 +64,7 @@ function new(config)
 		end
 	end
 
-	player.image:addEventListener( "collision")
+	player.body:addEventListener( "collision")
 
 	scene:addEventListener( 'playerState', player )
 	player.listeners[table.maxn(player.listeners)+1] = {event='playerState' , listener = player}
