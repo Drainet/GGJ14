@@ -8,7 +8,7 @@ function new(config)
 	
 	player.image = display.newGroup( )
 	player.image.type = nil
-
+	player.id  = config.path 
 	local imageSheet = graphics.newImageSheet( config.path, { width=100, height=100, numFrames=8 } )
 	local sequenceData =
 	{
@@ -48,14 +48,14 @@ function new(config)
 				elseif ( (self.type == nil and event.other.type ~= nil) or (self.type+2)%3==event.other.type ) then
 					--lose
 					player.dispose()
-					print( "lose" )
-					--
+					
+					
 				end
 
 			elseif (event.other.name=="element") then
-				print( "asas" )
+				
 				self.type = event.other.type
-				print( self.type )
+				scene:dispatchEvent({name='changeSkill',target = {type = self.type , id =player.id}})
 				player.body:setSequence( tostring(self.type) )
 				player.body:play()
 				

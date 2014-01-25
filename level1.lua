@@ -42,11 +42,11 @@ function scene:createScene( event )
 	
 	local playerA = player.new({x=360,y=200,direction={x=0,y=150}, path ="image/playerA.png"})
 	local playerB = player.new({x=360,y=1080,direction={x=0,y=-150}, path = "image/playerB.png"})
-	local controllA = controller.new({y=62,player = playerA, rotate = 180})
-	local controllB = controller.new({y=display.contentHeight-62,player = playerB,rotate = 0})
+	controllA = controller.new({y=62,player = playerA, rotate = 180})
+	controllB = controller.new({y=display.contentHeight-62,player = playerB,rotate = 0})
 
 	local elementDeploy = require "elementDeploy"
-	local test = elementDeploy.initDeploy()
+	elementGroup = elementDeploy.initDeploy()
 
 	-- local element1 = testElement.new({x = 100,y = 100})
 	-- local element1 = testElement.new({x = 200,y = 200})
@@ -65,9 +65,10 @@ function scene:createScene( event )
 	group:insert(mapA.image)
 
 	group:insert( background )
-	group:insert( test )
+	
 	group:insert( controllA.image )
 	group:insert( controllB.image )
+	group:insert( elementGroup )
 	group:insert( playerA.image )
 	group:insert( playerB.image )
 
