@@ -3,6 +3,7 @@ module(..., package.seeall)
 local object = require('Object')
 
 function new(config)
+
 	local player = object.new()
 	player.image = display.newGroup( )
 	player.body = display.newImage( "crate.png",config.x,config.y )
@@ -17,6 +18,7 @@ function new(config)
 
 		player.body.rotation = player.deg * 180 /math.pi 
 		player.body:setLinearVelocity(player.direction.x , player.direction.y)
+
 	end
 
 

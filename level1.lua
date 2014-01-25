@@ -18,8 +18,9 @@ physics.start(); physics.pause()
 
 physics.setGravity( 0, 0 )
 
---------------------------------------------
 
+local trap =  require("Objects.item.trap")
+--------------------------------------------
 -- forward declarations and other locals
 local screenW, screenH, halfW = display.contentWidth, display.contentHeight, display.contentWidth*0.5
 
@@ -47,13 +48,16 @@ function scene:createScene( event )
 	-- make a crate (off-screen), position it, and rotate slightly
 	
 	-- all display objects must be inserted into group
+
 	group:insert(mapA.image)
+
 	group:insert( background )
 	
 	group:insert( controllA.image )
 	group:insert( controllB.image )
 	group:insert( playerA.image )
 	group:insert( playerB.image )
+	group:insert( T1.image )
 end
 
 -- Called immediately after scene has moved onscreen:
