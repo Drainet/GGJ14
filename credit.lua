@@ -6,22 +6,6 @@
 
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
-local controller =  require("Objects.UI.controller")
-local player =  require("Objects.player.player")
-local eventCentralMOD =  require("eventCentral")
-local map = require("Objects.map.map")
-local eventCentral = eventCentralMOD.new()
-eventCentral:start( )
--- include Corona's "physics" library
-local physics = require "physics"
-local testElement = require "Objects.item.element"
-physics.start(); physics.pause()
-
-physics.setGravity( 0, 0 )
-
-system.activate("multitouch")
-
-local trap =  require("Objects.item.trap")
 --------------------------------------------
 -- forward declarations and other locals
 local screenW, screenH, halfW = display.contentWidth, display.contentHeight, display.contentWidth*0.5
@@ -37,46 +21,26 @@ local screenW, screenH, halfW = display.contentWidth, display.contentHeight, dis
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
 	local group = self.view
-
-
 	
-	local playerA = player.new({x=360,y=200,direction={x=0,y=150}, path ="image/playerA.png"})
-	local playerB = player.new({x=360,y=1080,direction={x=0,y=-150}, path = "image/playerB.png"})
-	local controllA = controller.new({y=62,player = playerA, rotate = 180})
-	local controllB = controller.new({y=display.contentHeight-62,player = playerB,rotate = 0})
-
-	local elementDeploy = require "elementDeploy"
-	local test = elementDeploy.initDeploy()
-
-	-- local element1 = testElement.new({x = 100,y = 100})
-	-- local element1 = testElement.new({x = 200,y = 200})
-	-- local element1 = testElement.new({x = 300,y = 300})
-	-- local element1 = testElement.new({x = 400,y = 400})
-
-
-	-- create a grey rectangle as the backdrop
-	local background = display.newImage( "gd.jpg", screenW/2, screenH/2 , true)
-	local mapA = map.new()
+	--------------- Credit Start ---------------
+	performanceText = display.newText("Credit", display.contentWidth/2, 100, native.systemFont, 80)
+	performanceText = display.newText("-----------", display.contentWidth/2, 200, native.systemFont, 80)
+	performanceText = display.newText("GGJ 2014", display.contentWidth/2, 300, native.systemFont, 50)
+	performanceText = display.newText("Name1", display.contentWidth/2, 500, native.systemFont, 60)
+	performanceText = display.newText("Name2", display.contentWidth/2, 600, native.systemFont, 60)
+	performanceText = display.newText("Name3", display.contentWidth/2, 700, native.systemFont, 60)
+	performanceText = display.newText("Name4", display.contentWidth/2, 800, native.systemFont, 60)
+	performanceText = display.newText("Name5", display.contentWidth/2, 900, native.systemFont, 60)
+	performanceText = display.newText("Name6", display.contentWidth/2, 1000, native.systemFont, 60)
 	
-	-- make a crate (off-screen), position it, and rotate slightly
 	
-	-- all display objects must be inserted into group
-
-	group:insert(mapA.image)
-
-	group:insert( background )
-	group:insert( test )
-	group:insert( controllA.image )
-	group:insert( controllB.image )
-	group:insert( playerA.image )
-	group:insert( playerB.image )
-
+	--------------- Credit End ---------------
 end
 
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
 	local group = self.view
-	physics.start()
+	
 	
 end
 
@@ -84,8 +48,6 @@ end
 function scene:exitScene( event )
 	local group = self.view
 	
-	physics.stop()
-	storyboard.removeScene( storyboard.getPrevious() )
 	
 end
 
@@ -93,8 +55,6 @@ end
 function scene:destroyScene( event )
 	local group = self.view
 	
-	package.loaded[physics] = nil
-	physics = nil
 end
 
 -----------------------------------------------------------------------------------------

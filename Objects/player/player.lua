@@ -48,14 +48,16 @@ function new(config)
 				elseif ( (self.type == nil and event.other.type ~= nil) or (self.type+2)%3==event.other.type ) then
 					--lose
 					player.dispose()
-					print( "lose" )
+					local victoryMenu = require("victoryMenu")
+					victoryMenu.new()
+					-- player.image:insert(victory)
 					--
 				end
 
 			elseif (event.other.name=="element") then
-				print( "asas" )
+				
 				self.type = event.other.type
-				print( self.type )
+				
 				player.body:setSequence( tostring(self.type) )
 				player.body:play()
 				
