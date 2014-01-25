@@ -6,19 +6,19 @@ function new(config)
 
 	local self = object.new()
 	self.image = display.newGroup( )
-
+	
 	self.lfbt = display.newImage( "image/leftBT.png",70,config.y )
 	self.rtbt = display.newImage( "image/rightBT.png",display.contentWidth-70,config.y )
 
 	self.image:insert( self.lfbt )
 	self.image:insert( self.rtbt )
-
+	--self.timer[]
 
 	function self.lfbt:touch( event )
 	    if event.phase == "began" then
 
 
-	        print( "left" )
+	        config.player.direction.x = config.player.direction.x - 10
 	    end
 	    return true
 	end 
@@ -27,7 +27,7 @@ function new(config)
 		if event.phase == "began" then
 
 	    	
-	    	print( "right" )
+	    	config.player.direction.x = config.player.direction.x + 10
 	    end
 	    return true
 
@@ -37,6 +37,6 @@ function new(config)
 	self.rtbt:addEventListener( "touch",self.rtbt)
 
 
-	return self.image
+	return self
 
 end

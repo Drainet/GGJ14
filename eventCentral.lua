@@ -10,6 +10,7 @@ function new()
     
 
     function allEnterFrame()
+        
         scene:dispatchEvent({name='floatingFloorMoving'} )
         scene:dispatchEvent({name='moveLayer'})
         scene:dispatchEvent({name='arrowControl'})
@@ -47,7 +48,7 @@ function new()
     end
 
     function spriteListener( event )
-        print( dodo )
+        
         event.target:stop()
     end
 

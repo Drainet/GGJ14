@@ -7,10 +7,15 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local controller =  require("Objects.UI.controller")
-
+local player =  require("Objects.player.player")
+local eventCentralMOD =  require("eventCentral")
+local eventCentral = eventCentralMOD.new()
+eventCentral:start( )
 -- include Corona's "physics" library
 local physics = require "physics"
 physics.start(); physics.pause()
+
+physics.setGravity( 0, 0 )
 
 --------------------------------------------
 
@@ -29,14 +34,14 @@ local screenW, screenH, halfW = display.contentWidth, display.contentHeight, dis
 function scene:createScene( event )
 	local group = self.view
 
-	local controllA = controller.new({y=display.contentHeight-62})
-	local controllB = controller.new({y=62})
-
+	
+	local playerA = player.new({x=360,y=50,direction={x=0,y=100}})
+	local playerB = player.new({x=360,y=1200,direction={x=0,y=-100}})
+	local controllA = controller.new({y=62,player = playerA})
+	local controllB = controller.new({y=display.contentHeight-62,player = playerB})
 	-- create a grey rectangle as the backdrop
-	local background = display.newRect( 0, 0, screenW, screenH )
-	background.anchorX = 0
-	background.anchorY = 0
-	background:setFillColor( .5 )
+	local background = display.newImage( "gd.jpg", screenW/2, screenH/2 )
+	
 	
 	-- make a crate (off-screen), position it, and rotate slightly
 	
@@ -44,8 +49,10 @@ function scene:createScene( event )
 	-- all display objects must be inserted into group
 	group:insert( background )
 	
-	group:insert( controllA )
-	group:insert( controllB )
+	group:insert( controllA.image )
+	group:insert( controllB.image )
+	group:insert( playerA.image )
+	group:insert( playerB.image )
 end
 
 -- Called immediately after scene has moved onscreen:
