@@ -57,7 +57,7 @@ function scene:createScene( event )
 	group:insert( controllB.image )
 	group:insert( playerA.image )
 	group:insert( playerB.image )
-	group:insert( T1.image )
+
 end
 
 -- Called immediately after scene has moved onscreen:
