@@ -6,22 +6,24 @@ function initDeploy(config)
 
 	local xArr = {}
 	local yArr = {}
+	local eArr = {}
 
-	local number = 5
-	-- if(config~=nil) then
-	-- 	if(config.number~=nil) then
-	-- 		number = config.number
-	-- 	end
-	-- end
+	local number = 6
+	if(config~=nil) then
+		if(config.number~=nil) then
+			number = config.number
+		end
+	end
 	
 	for i=1,number do
 		local notDupFlag = 0
+		local notDupElem = 0
 		local X = 0
 		local Y = 0
 
 		while notDupFlag == 0 do
 			notDupFlag = 1
-			Y = 128 + 80 + math.random(930)
+			Y = 128 + 80 + math.random(900)
 			X = 80 + math.random(600)
 			if i > 1 then
 				for j=1,i-1 do
@@ -33,7 +35,8 @@ function initDeploy(config)
 				end
 			end
 		end
-		element.new({x=X, y=Y, type=math.random(2)})
+		
+		element.new({x=X, y=Y, type = i % 3 })
 		xArr[i] = X
 		yArr[i] = Y
 	end
