@@ -32,6 +32,8 @@ function new(id)
 
         local endview =display.newImage("image/end.png", 360,640)
         Content:insert(endview)
+        endview:scale( 1.5, 2 )
+        transition.scaleTo( endview, { xScale=1, yScale=1, time=500 } )
 
         --print( id )
         if(id == "image/playerA_set.png")then
@@ -49,8 +51,8 @@ function new(id)
         buttonBack = widget.newButton
             {
                 id = "Back",
-                defaultFile = "buttonBlue.png",
-                label = "Back",
+                defaultFile = "buttonHome.png",
+                label = " ",
                 font = "arial",
                 labelColor = {default = {255, 255, 255, 255}},
                 fontSize = 28,
@@ -62,7 +64,7 @@ function new(id)
             {
                 id = "Again",
                 defaultFile = "buttonBlue.png",
-                label = "Again",
+                label = " ",
                 font = "arial",
                 labelColor = {default = {255, 255, 255, 255}},
                 fontSize = 28,
@@ -70,8 +72,12 @@ function new(id)
                 onPress = buttonHandler,
             }
 
-        buttonBack.x = display.contentWidth/2   ; buttonBack.y = display.contentHeight/2    -180
-        buttonAgain.x = display.contentWidth/2  ; buttonAgain.y = display.contentHeight/2    +180
+        buttonBack.x = -250   ; buttonBack.y = display.contentHeight/2    
+        buttonAgain.x = display.contentWidth+250  ; buttonAgain.y = display.contentHeight/2    
+
+
+        transition.moveTo( buttonBack, { x=50, y= display.contentHeight/2 , time=500 } )
+        transition.moveTo( buttonAgain, { x=display.contentWidth-50, y=display.contentHeight/2, time=500 } )
 
         Content:insert(buttonBack)
         Content:insert(buttonAgain)
