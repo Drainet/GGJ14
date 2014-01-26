@@ -53,9 +53,13 @@ function new(config)
 					player.body:setSequence( "dead" )
 					player.body:play()
 					local victoryMenu = require("victoryMenu")
-					victoryMenu.new(player.id)
+					
 
 					physics.pause( )
+					function delay( )
+						victoryMenu.new(player.id)
+					end
+					timer.performWithDelay(1500,delay)
 					-- player.image:insert(victory)
 					--
 
@@ -71,6 +75,11 @@ function new(config)
 				player.body:setSequence( tostring(self.type) )
 				player.body:play()
 				
+
+				-- sound effect
+				freeChannel = freeChannel +1
+				local elementSound = audio.loadSound("element.wav")
+				audio.play(elementSound , {channel = freeChannel ,loops = 0})
 			end
 
 		end

@@ -78,13 +78,20 @@ end
 function scene:enterScene( event )
 	local group = self.view
 	physics.start()
-	
+		freeChannel = 	freeChannel+1
+	local battleSong = audio.loadSound("battleSong.mp3")
+	audio.play(battleSong , {channel = freeChannel , fadein = 1000,volume =0 })
+	print(freeChannel)
+	--audio.stop({channel = 1})
+
 end
 
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
+
 	local group = self.view
-	
+	audio.fadeOut({channel = freeChannel , time = 1000 })
+
 	physics.stop()
 	storyboard.removeScene( storyboard.getPrevious() )
 	
@@ -93,7 +100,7 @@ end
 -- If scene's view is removed, scene:destroyScene() will be called just prior to:
 function scene:destroyScene( event )
 	local group = self.view
-	
+
 	package.loaded[physics] = nil
 	physics = nil
 end
