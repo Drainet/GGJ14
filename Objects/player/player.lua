@@ -8,17 +8,19 @@ function new(config)
 	
 	player.image = display.newGroup( )
 	player.image.type = nil
-
-	local imageSheet = graphics.newImageSheet( config.path, { width=100, height=100, numFrames=8 } )
+	
+	player.id  = config.path 
+	local imageSheet = graphics.newImageSheet( config.path, { width=100, height=100, numFrames=12 } )
 	local sequenceData =
 	{
 	    { name="normal", start=1, count=2, time=600 , loopCount=0 },
 	    { name="1", start=3, count=2, time=600 , loopCount=0 },
 	    { name="2", start=5, count=2, time=600 , loopCount=0},
-	    { name="0", start=7, count=2, time=600 , loopCount=0 }
+	    { name="0", start=7, count=2, time=600 , loopCount=0 },
+	    { name="dead", start=9, count=4, time=1000 }
 	}
 	player.body = display.newSprite( imageSheet, sequenceData )
-
+	player.body.selfCounter = false
 	player.body.x = config.x
 	player.body.y = config.y
 	player.body:setSequence( "normal" )
@@ -47,22 +49,34 @@ function new(config)
 				if ( self.type == nil and event.other.type == nil) then
 				elseif ( (self.type == nil and event.other.type ~= nil) or (self.type+2)%3==event.other.type ) then
 					--lose
-					player.dispose()
+					 --player.dispose()
+					player.body:setSequence( "dead" )
+					player.body:play()
 					local victoryMenu = require("victoryMenu")
-					victoryMenu.new()
+					victoryMenu.new(player.id)
+
+					physics.pause( )
 					-- player.image:insert(victory)
 					--
+
+
 				end
 
-			elseif (event.other.name=="element") then
+			elseif (event.other.name=="element" and player.body.selfCounter == false) then
 				
 				self.type = event.other.type
-				
+
+				scene:dispatchEvent({name='changeSkill',target = {type = self.type , id =player.id}})
+
 				player.body:setSequence( tostring(self.type) )
 				player.body:play()
 				
 			end
 
+		end
+
+		if(event.phase=="ended" and event.other.name=="element" and player.body.selfCounter == true) then
+			player.body.selfCounter = false
 		end
 	end
 

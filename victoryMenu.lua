@@ -1,7 +1,7 @@
 module(..., package.seeall)
 
 
-function new()
+function new(id)
     
     local widget = require( "widget" )
     local storyboard = require( "storyboard" )
@@ -29,6 +29,20 @@ function new()
         backCover.alpha = 0.2
 
         Content:insert(backCover)
+
+        local endview =display.newImage("image/end.png", 360,640)
+        Content:insert(endview)
+
+        --print( id )
+        if(id == "image/playerA_set.png")then
+            endview.rotation = 180
+        end
+
+        function backCover:touch(event )
+            -- body
+            return true
+        end
+        backCover:addEventListener( "touch", backCover)
 
         scene:dispatchEvent({name='pauseAllEvent'})
 

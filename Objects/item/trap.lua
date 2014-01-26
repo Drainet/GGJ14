@@ -33,8 +33,8 @@ function new(config)
 	trap.body.y = trap.image.y
 	trap.image.x = config.x
 	trap.image.y = config.y
-
-	physics.addBody(trap.image,"static")
+	
+	physics.addBody(trap.image,"static",{radius = 30})
 	trap.image.isSensor = true
 	function trap.image.collision(self , event)
 		--- player can change tpye of trap ---

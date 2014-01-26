@@ -25,7 +25,7 @@ function initDeploy(config)
 
 		while notDupFlag == 0 do
 			notDupFlag = 1
-			Y = 128 + 80 + math.random(900)
+			Y = 128 + 180 + math.random(700)
 			X = 80 + math.random(600)
 			if i > 1 then
 				for j=1,i-1 do
@@ -51,7 +51,7 @@ function initDeploy(config)
 
 		while notDupFlag == 0 do
 			notDupFlag = 1
-			Y = 128 + 80 + math.random(900)
+			Y = 128 + 280 + math.random(500)
 			X = 80 + math.random(600)
 			for j=1,i-1 do
 				if X > xArr[j] -150 and X < xArr[j] + 150 then
