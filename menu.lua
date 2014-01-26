@@ -16,13 +16,7 @@ local widget = require "widget"
 local playBtn
 
 -- 'onRelease' event listener for playBtn
-local function onPlayBtnRelease()
-	
-	-- go to level1.lua scene
-	storyboard.gotoScene( "level1", "fade", 1500 )
-	
-	return true	-- indicates successful touch
-end
+
 
 -----------------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
@@ -37,32 +31,39 @@ function scene:createScene( event )
 	local group = self.view
 
 	-- display a background image
-	local background = display.newImageRect( "background.jpg", display.contentWidth, display.contentHeight )
+	local background = display.newImageRect( "enter.png", display.contentWidth, display.contentHeight )
 	background.anchorX = 0
 	background.anchorY = 0
 	background.x, background.y = 0, 0
 	
 	-- create/position logo/title image on upper-half of the screen
-	local titleLogo = display.newImageRect( "logo.png", 264, 42 )
-	titleLogo.x = display.contentWidth * 0.5
-	titleLogo.y = 100
-	
+	local title = display.newImage( "shuffle.png", 486, 738 )
+	title:scale( 0.7, 0.7 )
+	title.rotation = 20
+	function listener1 ( obj )
+    	transition.to( title, { time=750,rotation = 0, xScale=1, yScale=1 , onComplete=listener2} )
+	end
+	function listener2 ( obj )
+
+    	transition.to( title, { time=750,rotation =20, xScale=0.7, yScale=0.7 , onComplete=listener1} )
+	end
 	-- create a widget button (which will loads level1.lua on release)
-	playBtn = widget.newButton{
-		label="Play Now",
-		labelColor = { default={255}, over={128} },
-		default="button.png",
-		over="button-over.png",
-		width=154, height=40,
-		onRelease = onPlayBtnRelease	-- event listener function
-	}
-	playBtn.x = display.contentWidth*0.5
-	playBtn.y = display.contentHeight - 125
+	transition.to( title, { time=750,rotation = 0, xScale=1, yScale=1 , onComplete=listener2} )
 	
 	-- all display objects must be inserted into group
 	group:insert( background )
-	group:insert( titleLogo )
-	group:insert( playBtn )
+	group:insert( title )
+
+
+	local function onPlayBtnRelease()
+	
+		 storyboard.gotoScene( "level1", "fade", 1500 )
+	
+	return true	-- indicates successful touch
+end
+	
+
+	group:addEventListener( "touch", onPlayBtnRelease )
 end
 
 -- Called immediately after scene has moved onscreen:

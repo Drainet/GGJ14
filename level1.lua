@@ -55,7 +55,7 @@ function scene:createScene( event )
 
 
 	-- create a grey rectangle as the backdrop
-	local background = display.newImage( "gd.jpg", screenW/2, screenH/2 , true)
+	local background = display.newImage( "gd2.png", screenW/2, screenH/2 , true)
 	local mapA = map.new()
 	
 	-- make a crate (off-screen), position it, and rotate slightly
