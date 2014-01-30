@@ -47,6 +47,7 @@ function new(config)
 			if(event.other.name=="player" or event.other.name == "trap") then
 				
 				if ( self.type == nil and event.other.type == nil) then
+					
 				elseif ( (self.type == nil and event.other.type ~= nil) or (self.type+2)%3==event.other.type ) then
 					--lose
 					 --player.dispose()

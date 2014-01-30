@@ -8,9 +8,11 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local controller =  require("Objects.UI.controller")
 local player =  require("Objects.player.player")
+local buffEffectMod = require("buffEffect")
 local eventCentralMOD =  require("eventCentral")
 local map = require("Objects.map.map")
 local eventCentral = eventCentralMOD.new()
+local buffEffect = buffEffectMod.new()
 eventCentral:start( )
 -- include Corona's "physics" library
 local physics = require "physics"
@@ -40,18 +42,15 @@ function scene:createScene( event )
 
 
 	
-	local playerA = player.new({x=360,y=200,direction={x=0,y=150}, path ="image/playerA_set.png"})
-	local playerB = player.new({x=360,y=1080,direction={x=0,y=-150}, path = "image/playerB_set.png"})
+	playerA = player.new({x=360,y=200,direction={x=0,y=150}, path ="image/playerA_set.png"})
+	playerB = player.new({x=360,y=1080,direction={x=0,y=-150}, path = "image/playerB_set.png"})
 	controllA = controller.new({y=62,player = playerA, rotate = 180})
 	controllB = controller.new({y=display.contentHeight-62,player = playerB,rotate = 0})
 
 	local elementDeploy = require "elementDeploy"
 	elementGroup = elementDeploy.initDeploy()
 
-	-- local element1 = testElement.new({x = 100,y = 100})
-	-- local element1 = testElement.new({x = 200,y = 200})
-	-- local element1 = testElement.new({x = 300,y = 300})
-	-- local element1 = testElement.new({x = 400,y = 400})
+	
 
 
 	-- create a grey rectangle as the backdrop

@@ -11,11 +11,12 @@ function new()
 
     function allEnterFrame()
         
-        scene:dispatchEvent({name='floatingFloorMoving'} )
+        -- scene:dispatchEvent({name='floatingFloorMoving'} )
         scene:dispatchEvent({name='moveLayer'})
         scene:dispatchEvent({name='arrowControl'})
         scene:dispatchEvent({name='playerState'})
         scene:dispatchEvent({name='turnHead'})
+        scene:dispatchEvent({name='buffEffect'})
     end    
 
     function allRuntimeTouch(event)
