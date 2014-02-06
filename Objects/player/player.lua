@@ -38,9 +38,24 @@ function new(config)
 		player.body.rotation = -90 + player.deg * 180 /math.pi 
 		player.body:setLinearVelocity(player.direction.x , player.direction.y)
 
+		if(player.body.x<-20 or player.body.x>display.contentWidth+20)then
+			
+			player.body.x = player.body.x*-1 + display.contentWidth
+
+		end
+
+		if(player.body.y<128-20 or player.body.y>display.contentHeight+20-128)then
+			player.body.y = player.body.y*-1 + display.contentHeight
+
+		end
+
 	end
 
-
+	function player:pauseAllEvent(event)
+		--print( "didi" )
+		scene:removeEventListener( 'playerState', player )
+		scene:removeEventListener('pauseAllEvent', player)
+	end
 	function player.body:collision(event)
 		
 		if(event.phase=="began") then
@@ -54,6 +69,7 @@ function new(config)
 					player.body:setSequence( "dead" )
 					player.body:play()
 					local victoryMenu = require("victoryMenu")
+					
 					
 
 					physics.pause( )
@@ -93,6 +109,7 @@ function new(config)
 	player.body:addEventListener( "collision")
 
 	scene:addEventListener( 'playerState', player )
+	
 	player.listeners[table.maxn(player.listeners)+1] = {event='playerState' , listener = player}
 	return player
 end

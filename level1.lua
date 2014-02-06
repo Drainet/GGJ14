@@ -55,21 +55,22 @@ function scene:createScene( event )
 
 	-- create a grey rectangle as the backdrop
 	local background = display.newImage( "gd2.png", screenW/2, screenH/2 , true)
-	local mapA = map.new()
+	--local mapA = map.new()
 	
 	-- make a crate (off-screen), position it, and rotate slightly
 	
 	-- all display objects must be inserted into group
 
-	group:insert(mapA.image)
+	--group:insert(mapA.image)
 
 	group:insert( background )
 	
-	group:insert( controllA.image )
-	group:insert( controllB.image )
+	
 	group:insert( elementGroup )
 	group:insert( playerA.image )
 	group:insert( playerB.image )
+	group:insert( controllA.image )
+	group:insert( controllB.image )
 
 end
 

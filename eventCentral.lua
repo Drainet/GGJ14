@@ -56,7 +56,7 @@ function new()
 --------------------------------- EventCentral API ---------------------------------
     function eventCental.start()
         Runtime:addEventListener("enterFrame", allEnterFrame)
-        Runtime:addEventListener( "touch", allRuntimeTouch)
+        --Runtime:addEventListener( "touch", allRuntimeTouch)
     end
 
     function eventCental.pause(pauseUI,switch)
@@ -87,6 +87,11 @@ function new()
         backCover.isVisible = false
 
     end
+    function eventCental:pauseAllEvent(event)
+        --print( "bobo" )
+        Runtime:removeEventListener("enterFrame", allEnterFrame)
+        scene:removeEventListener('pauseAllEvent', eventCental)
+    end
 
 -- Add sprite listener
     
@@ -105,9 +110,8 @@ function new()
         eventCental.stop()
     end
 
-    scene:addEventListener( 'callCentralStart', eventCental )
-    scene:addEventListener( 'callCentralPause', eventCental )
-    scene:addEventListener( 'callCentralStop', eventCental )
+    
+    scene:addEventListener('pauseAllEvent', eventCental)
 --------------------------------- External EventCentral API End ---------------------------------
 
     return eventCental
