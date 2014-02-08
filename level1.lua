@@ -78,11 +78,14 @@ end
 function scene:enterScene( event )
 	local group = self.view
 	physics.start()
-		freeChannel = 	freeChannel+1
-	local battleSong = audio.loadSound("battleSong.mp3")
-	audio.play(battleSong , {channel = freeChannel , fadein = 1000,volume =0 })
-	print(freeChannel)
-	--audio.stop({channel = 1})
+
+	-- control Game battle theme play & resume
+	if (not audio.isChannelActive(battleMusicChannel)) then
+		local battleSong = audio.loadSound("battleSong_new.mp3")
+		audio.play(battleSong , {channel = battleMusicChannel , fadein = 1000,volume =0 ,loops=-1})
+	else
+		audio.resume(battleMusicChannel)
+	end
 
 end
 
@@ -90,7 +93,8 @@ end
 function scene:exitScene( event )
 
 	local group = self.view
-	audio.fadeOut({channel = freeChannel , time = 1000 })
+	-- pause game battle theme when exit scene
+	audio.pause(battleMusicChannel)
 
 	physics.stop()
 	storyboard.removeScene( storyboard.getPrevious() )

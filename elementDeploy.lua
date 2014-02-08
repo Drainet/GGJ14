@@ -71,7 +71,6 @@ function initDeploy(config)
 
 	end
 
-
 	return group
 
 end

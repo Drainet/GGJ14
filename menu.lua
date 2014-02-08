@@ -69,9 +69,13 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
 	local group = self.view
-	local mainSong = audio.loadSound("mainSong.mp3")
-		freeChannel = 	freeChannel+1
-		audio.play(mainSong , {channel =  freeChannel})
+
+	if (not audio.isChannelActive(menuMusicChannel)) then
+		local mainSong = audio.loadSound("mainSong_new.mp3")
+		audio.play(mainSong , {channel =  menuMusicChannel , loops=-1})
+	else
+		audio.resume(menuMusicChannel)
+	end
 	-- INSERT code here (e.g. start timers, load audio, start listeners, etc.)
 	
 end
@@ -79,7 +83,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
 	local group = self.view
-	audio.fadeOut({channel =  freeChannel , time = 1000})
+	audio.pause(menuMusicChannel)
 	-- INSERT code here (e.g. stop timers, remove listenets, unload sounds, etc.)
 	
 end

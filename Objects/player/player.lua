@@ -94,7 +94,8 @@ function new(config)
 				
 
 				-- sound effect
-				freeChannel = freeChannel +1
+				freeChannel = audio.findFreeChannel(3)
+				audio.setMaxVolume( 0.75, { channel=freeChannel } )
 				local elementSound = audio.loadSound("element.wav")
 				audio.play(elementSound , {channel = freeChannel ,loops = 0})
 			end
