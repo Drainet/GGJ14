@@ -58,6 +58,13 @@ function new(config)
 	end
 	function player.body:collision(event)
 		
+		buffElement[1].x = -100
+        buffElement[1].y = -100
+        buffElement[2].x = -100
+        buffElement[2].y = -100
+    	buffElement[3].x = -100
+    	buffElement[3].y = -100	
+
 		if(event.phase=="began") then
 			if(event.other.name=="player" or event.other.name == "trap") then
 				
@@ -66,6 +73,7 @@ function new(config)
 				elseif ( (self.type == nil and event.other.type ~= nil) or (self.type+2)%3==event.other.type ) then
 					--lose
 					 --player.dispose()
+
 					player.body:setSequence( "dead" )
 					player.body:play()
 					local victoryMenu = require("victoryMenu")
@@ -85,6 +93,7 @@ function new(config)
 
 			elseif (event.other.name=="element" and player.body.selfCounter == false) then
 				
+
 				self.type = event.other.type
 
 				scene:dispatchEvent({name='changeSkill',target = {type = self.type , id =player.id}})

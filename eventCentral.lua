@@ -88,7 +88,6 @@ function new()
 
     end
     function eventCental:pauseAllEvent(event)
-        --print( "bobo" )
         Runtime:removeEventListener("enterFrame", allEnterFrame)
         scene:removeEventListener('pauseAllEvent', eventCental)
     end

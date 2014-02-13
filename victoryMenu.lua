@@ -47,6 +47,15 @@ function new(id)
         backCover:addEventListener( "touch", backCover)
 
         scene:dispatchEvent({name='pauseAllEvent'})
+        -- move buff effect to outside --
+            buffElement[1].x = -100
+            buffElement[1].y = -100
+            buffElement[2].x = -100
+            buffElement[2].y = -100
+            buffElement[3].x = -100
+            buffElement[3].y = -100 
+        -- move buff effect to outside --
+        
 
         buttonBack = widget.newButton
             {
@@ -81,7 +90,6 @@ function new(id)
 
         Content:insert(buttonBack)
         Content:insert(buttonAgain)
-
         
     
 ------------------- pauseMenu End ---------------

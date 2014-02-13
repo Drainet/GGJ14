@@ -21,6 +21,8 @@ physics.start(); physics.pause()
 
 physics.setGravity( 0, 0 )
 
+-- physics.setDrawMode( "hybrid" )
+
 system.activate("multitouch")
 
 local trap =  require("Objects.item.trap")
@@ -50,6 +52,10 @@ function scene:createScene( event )
 	local elementDeploy = require "elementDeploy"
 	elementGroup = elementDeploy.initDeploy()
 
+	buffElement = {}
+    buffElement[1] = display.newImage("image/buffWater.png", -100, -100, true)
+    buffElement[2] = display.newImage("image/buffFire.png", -100, -100, true)
+    buffElement[3] = display.newImage("image/buffTree.png", -100, -100, true)
 	
 
 
@@ -69,6 +75,9 @@ function scene:createScene( event )
 	group:insert( elementGroup )
 	group:insert( playerA.image )
 	group:insert( playerB.image )
+	group:insert( buffElement[1] )
+	group:insert( buffElement[2] )
+	group:insert( buffElement[3] )
 	group:insert( controllA.image )
 	group:insert( controllB.image )
 

@@ -27,7 +27,7 @@ function new(config)
 	element.image.isSensor = true
 
 	function element.image.collision(self, event)
-		--print("SSS")
+	
 		if(event.other.name == "player" and event.phase=="began" ) then
 			
 			-- element.image:removeSelf( )
